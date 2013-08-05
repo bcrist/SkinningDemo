@@ -78,6 +78,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="skeletal_mesh.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="demo.h" />
+    <ClInclude Include="skeletal_mesh.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

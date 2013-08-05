@@ -1,0 +1,53 @@
+
+//== SHADER COMPILE STATUS = TRUE
+#version 330
+
+uniform mat4 bind_pose_inv[7];
+uniform mat4 current_pose[7];
+uniform vec4 current_pose_colors[7];
+
+layout(location = 0) in vec2 position;
+layout(location = 1) in int joint_0_index;
+layout(location = 2) in int joint_1_index;
+layout(location = 3) in int joint_2_index;
+layout(location = 4) in float joint_0_weight;
+layout(location = 5) in float joint_1_weight;
+layout(location = 6) in float joint_2_weight;
+
+out vec4 color;
+
+void main()
+{
+   vec4 vertex_coords = vec4(position, 0, 1);
+   gl_Position = vec4(0,0,0,0);
+   color = vec4(0,0,0,0);
+
+   // For each joint affecting this vertex, find the vertex's
+   // position relative to the joint in bind pose by using
+   // bind_pose_inv, then transform that position using the
+   // current pose transform to find the position where the
+   // vertex should be considering only that joint.
+   //
+   // Take the weighted average of the positions where each
+   // joint thinks the vertex should be, and that is the
+   // final vertex position.
+
+   // first joint affecting vertex
+   color += joint_0_weight * current_pose_colors[joint_0_index];
+   gl_Position += joint_0_weight * (current_pose[joint_0_index] *
+                                   bind_pose_inv[joint_0_index] *
+                                   vertex_coords);
+
+   // second joint affecting vertex
+   color += joint_1_weight * current_pose_colors[joint_1_index];
+   gl_Position += joint_1_weight * (current_pose[joint_1_index] *
+                                   bind_pose_inv[joint_1_index] *
+                                   vertex_coords);
+
+   // third joint affecting vertex
+   color += joint_2_weight * current_pose_colors[joint_2_index];
+   gl_Position += joint_2_weight * (current_pose[joint_2_index] *
+                                   bind_pose_inv[joint_2_index] *
+                                   vertex_coords);
+   gl_Position.w = 1;
+   color = vec4(float(joint_2_index) * 0.0000000001, 1, 0, 1);}

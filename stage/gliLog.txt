@@ -1,0 +1,8 @@
+GL Intercept Log. Version : 1.20    Compile Date: Jun  3 2013    Run on: Mon Aug 05 02:47:25 2013
+
+===================================================
+ShaderGLSLManager::Destructor - OpenGL id 3 is still active. (ShaderGLSL Memory leak?)
+ShaderGLSLManager::Destructor - OpenGL id 1 is still active. (ShaderGLSL Memory leak?)
+ShaderGLSLManager::Destructor - OpenGL id 2 is still active. (ShaderGLSL Memory leak?)
+===================================================
+Log End.
